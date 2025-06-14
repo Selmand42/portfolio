@@ -1,6 +1,6 @@
 # Selman Demir - Portfolio Website
 
-A modern, responsive personal portfolio website showcasing mathematical engineering, AI/ML expertise, and competitive programming achievements.
+A modern, responsive personal portfolio website showcasing mathematical engineering, AI/ML expertise, competitive programming achievements, and athletic activities.
 
 ## 🚀 Live Features
 
@@ -9,15 +9,17 @@ A modern, responsive personal portfolio website showcasing mathematical engineer
 - **Interactive Elements**: Hover effects, scroll animations, and dynamic content
 - **Contact Form**: Form validation with direct contact information
 - **SEO Optimized**: Proper meta tags and semantic HTML structure
-- **Professional Sections**: Skills, Certifications, Achievements, and Projects
+- **Professional Sections**: Skills, Certifications, Achievements, Projects, and Sports
+- **Interactive Map**: Strava routes visualization with Leaflet.js
 
 ## 📁 File Structure
 
 ```
-├── index.html      # Main HTML file
-├── styles.css      # CSS styles and responsive design
-├── script.js       # JavaScript functionality
-└── README.md       # Documentation
+├── index.html              # Main HTML file
+├── styles.css              # CSS styles and responsive design
+├── script.js              # JavaScript functionality
+├── strava_routes_map.html # Interactive map of athletic activities
+└── README.md              # Documentation
 ```
 
 ## 🎯 Portfolio Sections
@@ -58,9 +60,21 @@ Organized by categories:
 - **AI & Data Science Projects**: Machine learning applications
 - **General Development Projects**: Full-stack and automation tools
 
-### 7. **Contact Section**
+### 7. **Sports & Activities Section**
+- **Interactive Map**: Strava routes visualization
+- **Activity Statistics**: Total distance, race finishes, routes
+- **Sports Portfolio**:
+  - Running routes and races
+  - Cycling paths
+  - Swimming locations
+  - Orienteering courses
+  - Bouldering spots
+  - Football fields
+- **Strava Integration**: Direct link to athletic profile
+
+### 8. **Contact Section**
 - Direct contact information for Istanbul, Turkey
-- Social media links (LinkedIn, GitHub, LeetCode, Instagram)
+- Social media links (LinkedIn, GitHub, LeetCode, Strava, Instagram)
 - Contact form with validation (shows direct email for contact)
 
 ## 🎨 Design Features
@@ -77,6 +91,7 @@ Organized by categories:
 - **Smooth Animations**: Scroll-triggered and hover effects
 - **Typography**: Inter font family for readability
 - **Responsive Grid**: Flexible layouts for all devices
+- **Interactive Map**: Leaflet.js integration for route visualization
 
 ## 📱 Technical Implementation
 
@@ -87,6 +102,7 @@ Organized by categories:
 - **Form Validation**: Input validation with user feedback
 - **Counter Animations**: Animated statistics in achievements
 - **Interactive Notifications**: Success/error message system
+- **Map Integration**: Leaflet.js for Strava routes visualization
 
 ### CSS Features
 - **CSS Grid & Flexbox**: Modern layout systems
@@ -94,29 +110,36 @@ Organized by categories:
 - **Media Queries**: Responsive design for all screen sizes
 - **Animations**: Keyframe animations and transitions
 - **Gradient Effects**: Advanced gradient text and backgrounds
+- **Map Styling**: Custom map container and controls
 
 ### Performance Optimizations
 - **Efficient CSS**: Optimized selectors and minimal reflows
 - **Lazy Loading**: Scroll-triggered animations
-- **Minimal Dependencies**: Only Font Awesome and Google Fonts
+- **Minimal Dependencies**: Only essential libraries
 - **Semantic HTML**: Proper structure for SEO and accessibility
+- **Map Optimization**: Efficient tile loading and clustering
 
-## 🖼️ Profile Photo Setup
+## 🗺️ Map Integration
 
-### Google Drive Integration
-1. Upload your photo to Google Drive
-2. Right-click → Share → "Anyone with the link can view"
-3. Copy the file ID from the share URL
-4. Update the image source in `index.html`:
-```html
-<img src="https://drive.google.com/thumbnail?id=YOUR_FILE_ID&sz=w1000"
-     alt="Selman Demir" class="profile-photo">
-```
+### Strava Routes Map
+1. **Map Features**:
+   - Interactive route visualization
+   - Start/end point markers
+   - Activity type indicators
+   - Popup information
+   - Multiple map layers
 
-### Alternative: Local Images
-1. Create an `images` folder in your project
-2. Save your photo as `profile.jpg`
-3. Update HTML: `<img src="images/profile.jpg" alt="Selman Demir" class="profile-photo">`
+2. **Technical Implementation**:
+   - Leaflet.js for map rendering
+   - Custom markers and icons
+   - Responsive container
+   - Mobile-friendly controls
+
+3. **Customization**:
+   - Update routes in `strava_routes_map.html`
+   - Modify marker styles and colors
+   - Add new activity types
+   - Customize popup content
 
 ## 📞 Contact Form
 
@@ -135,7 +158,7 @@ The contact form includes:
 2. Upload all files to the repository
 3. Go to Settings → Pages
 4. Select source branch (main)
-5. Access at: `https://yourusername.github.io/repository-name`
+5. Access at: `https://github.com/Selmand42/portfolio`
 
 ### Netlify
 1. Create a Netlify account
@@ -175,6 +198,7 @@ The contact form includes:
 - **Certifications**: Add new certifications with valid links
 - **Achievements**: Update with personal accomplishments
 - **Projects**: Replace with your own project repositories
+- **Sports**: Update Strava routes and activity information
 
 ### Color Customization
 Update CSS custom properties:
