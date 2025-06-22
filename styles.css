@@ -2106,6 +2106,92 @@ section {
     font-size: 1rem;
 }
 
+.date-note {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Activity Breakdown Styles */
+.activity-breakdown {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activity-breakdown h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.activity-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #f43f5e;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.activity-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.activity-header i {
+    font-size: 1.5rem;
+    color: #f43f5e;
+}
+
+.activity-header h4 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.activity-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.activity-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.stat-label {
+    color: #666;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: #333;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
 .map-container {
     background: white;
     padding: 20px;
@@ -2160,6 +2246,14 @@ section {
 @media (max-width: 768px) {
     .running-stats {
         grid-template-columns: 1fr;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-breakdown {
+        padding: 20px;
     }
 
     .map-container {
