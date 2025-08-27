@@ -2442,12 +2442,43 @@ section {
     font-size: 1rem;
 }
 
-.map-container {
+.map-section {
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    padding: 2rem;
     border-radius: 20px;
+    padding: 3rem;
     box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
     border: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+    margin: 4rem 0;
+}
+
+.map-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f43f5e, #3b82f6, #fbbf24);
+}
+
+.map-section h3 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #0f172a;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.map-container {
+    background: transparent;
+    padding: 0;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
 }
 
 .running-description {
@@ -2558,8 +2589,18 @@ section {
         padding: 2rem;
     }
 
+    .map-section {
+        padding: 2rem;
+        margin: 3rem 0;
+    }
+
+    .map-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
     .map-container {
-        padding: 1.5rem;
+        padding: 0;
     }
 
     .running-description {
@@ -2588,5 +2629,175 @@ section {
     .activity-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    .map-section {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .map-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Recent Football Activity Section Styles */
+.recent-activity {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+    margin: 4rem 0;
+}
+
+.recent-activity::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f43f5e, #3b82f6, #fbbf24);
+}
+
+.recent-activity h3 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #0f172a;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+
+
+.video-info {
+    padding-top: 1.5rem;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.video-meta i {
+    font-size: 1.4rem;
+    color: #f43f5e;
+    background: linear-gradient(135deg, #f43f5e 0%, #3b82f6 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.video-date {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    color: #64748b;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.recent-activity .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 15px;
+}
+
+.video-description {
+    color: #64748b;
+    line-height: 1.7;
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Mobile Responsive Styles for Video Section */
+@media (max-width: 768px) {
+    .recent-activity {
+        padding: 2rem;
+        margin: 3rem 0;
+    }
+
+    .recent-activity h3 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+
+
+    .video-meta {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .video-meta i {
+        font-size: 1.2rem;
+    }
+
+    .video-date {
+        align-self: center;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .video-description {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .recent-activity {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .recent-activity h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+
+
+    .video-meta i {
+        font-size: 1.1rem;
+    }
+
+    .video-description {
+        font-size: 0.95rem;
+    }
+
+    .video-date {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.7rem;
     }
 }
