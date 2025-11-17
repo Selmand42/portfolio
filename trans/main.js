@@ -69,7 +69,7 @@
       __privateSet(this, _player_speed, 10);
       __privateSet(this, _ball_x, __privateGet(this, _width) / 2);
       __privateSet(this, _ball_y, __privateGet(this, _height) / 2);
-      __privateSet(this, _ball_dx, -1);
+      __privateSet(this, _ball_dx, 1);
       __privateSet(this, _ball_dy, 0);
       __privateSet(this, _ball_speed, 8);
       __privateSet(this, _player1y, 10);
