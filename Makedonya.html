@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makedonya Kosova Planı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .trip-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .trip-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+
+        .trip-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .trip-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .day-section {
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .day-content {
+            padding: 15px 20px;
+        }
+
+        .activity {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: start;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity:hover {
+            background: #f8f9ff;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .activity-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .activity-name {
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .why {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+
+        .alternatives {
+            background: #fff9e6;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .alternatives h4 {
+            color: #f57c00;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .alternative-item {
+            margin-bottom: 15px;
+        }
+
+        .alternative-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skipped {
+            background: #ffe6e6;
+            border: 1px solid #f44336;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-top: 15px;
+        }
+
+        .skipped h4 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .skipped-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skipped-item {
+            background: white;
+            border-left: 3px solid #f44336;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .skipped-item strong {
+            display: block;
+            color: #d32f2f;
+            margin-bottom: 3px;
+        }
+
+        .notes {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+        }
+
+        .notes h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notes li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .compact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 3px solid #667eea;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .info-box strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .weather-warning {
+            font-size: 0.75em;
+            color: #ff9800;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ff9800;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .activity {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .time {
+                font-size: 0.85em;
+            }
+
+            .trip-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏔️ Makedonya Kosova Planı</h1>
+        </header>
+
+        <div class="content">
+            <!-- Seyahat Başlığı -->
+            <div class="trip-header">
+                <h2>Üsküp, Kosova, Ohrid - İlk 3 Gün</h2>
+                <div class="trip-info">
+                    <span>🚗 <strong>Alış:</strong> 27 Ocak 2026 (Salı) 10:00 - Üsküp Havaalanı</span>
+                    <span>🚗 <strong>Teslim:</strong> 29 Ocak 2026 (Perşembe) 19:00 - Üsküp Havaalanı</span>
+                    <span>📅 <strong>Süre:</strong> 3 gün</span>
+                </div>
+            </div>
+
+            <!-- Özet Bilgiler -->
+            <div class="compact-info">
+                <div class="info-box">
+                    <strong>Gün 1 - 27 Ocak 2026 (Salı)</strong>
+                    Üsküp şehir gezisi ve Matka Kanyonu
+                </div>
+                <div class="info-box">
+                    <strong>Gün 2 - 28 Ocak 2026 (Çarşamba)</strong>
+                    Prizren (Kosova) - şehir gezisi
+                </div>
+                <div class="info-box">
+                    <strong>Gün 3 - 29 Ocak 2026 (Perşembe)</strong>
+                    Ohrid - şehir gezisi, rota üzerinden opsiyonel duraklar
+                </div>
+            </div>
+
+            <!-- GÜN 1 -->
+            <div class="day-section">
+                <div class="day-header">GÜN 1 - 27 OCAK 2026 (SALI) - ÜSKÜP</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">10:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Havaalanında aracı almak</div>
+                            <div class="why">Merkeze erken geçip şehir yürüyüşünü rahat yapmak</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp merkeze varış</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:45-12:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Taşköprü → Üsküp Meydanı → Eski Çarşı yürüyüşü</div>
+                            <div class="why">Sabah saatlerinde kalabalık az oluyor ve çarşının atmosferi daha net hissediliyor</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:30-13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Öğle molası (çarşı içi)</div>
+                            <div class="why">Öğleden sonra Matka'ya gitmeden enerji toplamak</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Matka Kanyonu'na hareket</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">14:00-16:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Matka'da kısa yürüyüş + tekne turu</div>
+                            <div class="why">1.5-2 saat hem tekne hem yürüyüş için optimum süre</div>
+                            <div class="weather-warning">⚠️ Hava şartları kontrol edilmeli - tekne turu hava koşullarına bağlı</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">16:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp merkeze dönüş</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">16:30-19:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Vodno dağı (teleferik açıksa)</div>
+                            <div class="why">Gün ışığına en çok uyan zaman dilimi</div>
+                            <div class="weather-warning">⚠️ Hava şartları kontrol edilmeli - teleferik kötü hava koşullarında kapalı olabilir</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Akşam yemeği ve serbest zaman</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GÜN 2 -->
+            <div class="day-section">
+                <div class="day-header">GÜN 2 - 28 OCAK 2026 (ÇARŞAMBA) - PRIZREN (KOSOVA)</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">08:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp'ten çıkış</div>
+                            <div class="why">Sınır geçişinde oluşabilecek 10-20 dakikalık beklemeyi riske atmamak</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Prizren'e varış</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:45-12:15</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Şehir içi yürüyüş: Sinan Paşa Camii → Taş Köprü → Gazi Mehmet Paşa Hamamı → Maraş Bölgesi (nehir kenarı)</div>
+                            <div class="why">Kısa rota ve şehrin dokusunu doğrudan hissettirir, Osmanlı eserleri ve nehir manzarası</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:15-13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Öğle yemeği</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:30-15:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Prizren Kalesi'ne yürüyüş ve manzara</div>
+                            <div class="why">Gün ışığı açısından en ideal zaman dilimi</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">15:30-16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Etnografik Müze veya Liga Müzesi (opsiyonel - vakit kalırsa)</div>
+                            <div class="why">Şehrin kültürel zenginliğini daha iyi anlamak için</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">16:30-17:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Sokaklarda kısa kahve molası + serbest yürüyüş</div>
+                            <div class="why">Şehrin asıl atmosferi bu aralıkta ortaya çıktığı için</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">17:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp'e dönüş</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:00-19:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp'e varış</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e8f5e9;">
+                        <div class="time">19:30-21:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Opsiyonel:</strong> Üsküp Kalesi akşam ziyareti veya Eski Çarşı'da akşam yürüyüşü</div>
+                            <div class="why">Akşam atmosferi farklı, kalabalık azalır ve şehir ışıklarıyla güzel görünüm sunar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GÜN 3 -->
+            <div class="day-section">
+                <div class="day-header">GÜN 3 - 29 OCAK 2026 (PERŞEMBE) - OHRID</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">07:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp'ten çıkış → Ohrid'e doğru</div>
+                            <div class="why">Ohrid dönüşüyle birlikte toplamda 5-5.5 saat yol olacak</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff9e6;">
+                        <div class="time">Vakit kalırsa</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Rota üzerinden geçiş:</strong> Mavrovo Milli Parkı (dağ geçişi, göl manzarası) veya Debar (göl manzarası, manastır bölgesi)</div>
+                            <div class="why" style="font-size: 0.75em;">Vakit kalırsa bu rotalar üzerinden geçiş yapılabilir, normal rota 2.5 saat sürer</div>
+                            <div class="weather-warning">⚠️ Hava şartları kontrol edilmeli - özellikle Mavrovo dağ geçişi kötü hava koşullarında riskli olabilir</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Ohrid'e varış</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:00-12:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Eski şehir yürüyüşü: Ohrid Kalesi → Antik tiyatro → St. Kaneo kilisesi</div>
+                            <div class="why">Kısa ama çok yüksek görsel karşılık veren ideal rota</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:30-13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Göl kenarında öğle molası</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:30-15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Göl kenarında yürüyüş veya kısa tekne turu (hava uygunsa)</div>
+                            <div class="weather-warning">⚠️ Hava şartları kontrol edilmeli - tekne turu ve açık hava aktiviteleri hava koşullarına bağlı</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp'e dönüş</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e8f5e9;">
+                        <div class="time">Opsiyonel</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Dönüş yolunda:</strong> Struga (Ohrid'den 15 dk) - Drim Nehri yürüyüşü, göl kenarında mola</div>
+                            <div class="why" style="font-size: 0.75em;">Vakit kalırsa dönüş yolunda kısa bir mola, zaman kaybettirmez</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">17:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Üsküp havaalanı çevresinde olmak</div>
+                            <div class="why">Yoğun saatlerde şehirden havaalanına geçiş riskini ortadan kaldırmak</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Aracı teslim (Havaalanı)</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e3f2fd;">
+                        <div class="time">19:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Otogara hareket</strong> (Havaalanından Üsküp otogarına)</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e3f2fd;">
+                        <div class="time">20:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Otogara varış</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e3f2fd;">
+                        <div class="time">Otobüs ile</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Belgrad'a geçiş</strong> (Otobüs seferi)</div>
+                            <div class="why">Otobüsle Belgrad'a yolculuk</div>
+                        </div>
+                    </div>
+
+                    <!-- Vakit Kalmadığı İçin Atlanan Yerler -->
+                    <div class="skipped">
+                        <h4>⏰ Vakit Kalmadığı İçin Atlanan Yerler</h4>
+                        <div class="skipped-items">
+                            <div class="skipped-item">
+                                <strong>Bay of Bones Museum</strong>
+                                Ohrid Gölü üzerindeki tarihi su üstü müzesi
+                            </div>
+                            <div class="skipped-item">
+                                <strong>Saint Naum Manastırı</strong>
+                                Ohrid'in güneyinde, Arnavutluk sınırına yakın tarihi manastır
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notlar -->
+            <div class="notes">
+                <h4>📝 Notlar</h4>
+                <ul>
+                    <li>Şehirlerin önemli yerlerini görecek, atmosferini hissedecek kadar şehir gezisi</li>
+                    <li>"Buraya kadar gelmişken görmeden olmaz" denecek kadar tarih ve kültür gezisi</li>
+                    <li>Hareketli bir program temposu tercih ediliyor</li>
+                    <li>Üsküp'ten Ohrid'e giderken vakit kalırsa Mavrovo veya Debar rotaları üzerinden geçiş yapılabilir</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
