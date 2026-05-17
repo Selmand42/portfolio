@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris Planı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #0055a4 0%, #ef4135 100%);
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0055a4 0%, #ef4135 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .trip-header {
+            background: linear-gradient(135deg, #0055a4 0%, #ef4135 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .trip-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+
+        .trip-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .trip-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .day-section {
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #0055a4 0%, #ef4135 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .day-content {
+            padding: 15px 20px;
+        }
+
+        .activity {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: start;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity:hover {
+            background: #f7fbff;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #0055a4;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .activity-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .activity-name {
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .why {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+
+        .transport {
+            font-size: 0.75em;
+            color: #0055a4;
+            padding-left: 10px;
+            border-left: 2px solid #0055a4;
+            margin-top: 2px;
+        }
+
+        .alternatives {
+            background: #fff9e6;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .alternatives h4 {
+            color: #b15b00;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .alternative-item {
+            margin-bottom: 15px;
+        }
+
+        .alternative-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+        }
+
+        .notes h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notes li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .compact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 3px solid #0055a4;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .info-box strong {
+            color: #0055a4;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .weather-warning {
+            font-size: 0.75em;
+            color: #b15b00;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ffc107;
+            margin-top: 4px;
+        }
+
+        .flight-box {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .flight-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .flight-option {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .flight-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .flight-option strong {
+            color: #1565c0;
+        }
+
+        @media (max-width: 768px) {
+            .activity {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .time {
+                font-size: 0.85em;
+            }
+
+            .trip-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇫🇷 Paris Planı</h1>
+        </header>
+
+        <div class="content">
+            <div class="trip-header">
+                <h2>Paris — 4 Gün / Asnières-sur-Seine Konaklama</h2>
+                <div class="trip-info">
+                    <span>✈️ <strong>Varış:</strong> 25 Mayıs 2026 (Pazartesi) 00:00 — Paris havaalanı</span>
+                    <span>🏨 <strong>Konaklama:</strong> Asnières-sur-Seine, Île-de-France</span>
+                    <span>🚌 <strong>Ayrılış:</strong> 28 Mayıs 2026 (Perşembe) 23:30 — Amsterdam otobüsü</span>
+                    <span>🚇 <strong>Ulaşım:</strong> Metro + RER + Transilien; Versay için RER/Transilien</span>
+                </div>
+            </div>
+
+            <div class="compact-info">
+                <div class="info-box">
+                    <strong>Paris Gün 1 — 25 Mayıs (Pazartesi)</strong>
+                    Varış, dinlenme; Champs-Élysées + Arc de Triomphe + Eyfel akşamı
+                </div>
+                <div class="info-box">
+                    <strong>Paris Gün 2 — 26 Mayıs (Salı)</strong>
+                    Versay Sarayı + Montmartre / Sacré-Cœur gün batımı
+                </div>
+                <div class="info-box">
+                    <strong>Paris Gün 3 — 27 Mayıs (Çarşamba)</strong>
+                    Louvre + Notre Dame / Île de la Cité + Seine tekne turu
+                </div>
+                <div class="info-box">
+                    <strong>Paris Gün 4 — 28 Mayıs (Perşembe)</strong>
+                    Orsay Müzesi + merkez son tur; 23:30 otobüs
+                </div>
+            </div>
+
+            <div class="flight-box">
+                <h4>🎯 Paris Have-to Listesi — Plana Dahil</h4>
+                <div class="flight-option">
+                    <strong>8 ana durak:</strong> Eyfel Kulesi, Louvre, Montmartre + Sacré-Cœur, Champs-Élysées + Arc de Triomphe, Notre Dame + Île de la Cité, Orsay Müzesi, Seine Nehri/köprüler, Versay Sarayı.
+                </div>
+                <div class="flight-option">
+                    <strong>Kapanış günleri dikkate alındı:</strong> Orsay ve Versay Pazartesi kapalı; Louvre Salı kapalı. Bu yüzden Louvre Çarşamba, Versay Salı, Orsay Perşembe planlandı.
+                </div>
+            </div>
+
+            <div class="alternatives" style="margin-bottom: 20px;">
+                <h4>🎫 Paris Biletleri — Öncelik Sırası</h4>
+                <p style="margin: 0; color: #666; font-size: 0.9em;">
+                    <strong>Louvre</strong>, <strong>Versay</strong>, <strong>Orsay</strong>, <strong>Eyfel Kulesi</strong> ve <strong>Arc de Triomphe</strong> için saatli biletleri önceden alın.
+                    Notre Dame için giriş/rezervasyon durumunu seyahate yakın kontrol edin; Seine teknesi için akşam slotu hava durumuna göre seçilebilir.
+                </p>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">PARİS GÜN 1 — 25 MAYIS 2026 (PAZARTESİ) — VARIŞ, ZAFER TAKI & EYFEL</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">00:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Paris havaalanına varış</div>
+                            <div class="why">Gece varışı olduğu için ilk hedef konaklamaya geçip uyku almak</div>
+                            <div class="transport">🚇 Havaalanı → Asnières-sur-Seine: havaalanına göre RER/metro/taksi; gece saatinde taksi veya resmi shuttle daha rahat olabilir</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">01:30–10:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Asnières-sur-Seine — check-in / dinlenme</div>
+                            <div class="why">İlk günü ağır müzeyle başlatmamak için toparlanma bloğu</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">11:30–13:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Asnières çevresinde geç kahvaltı + merkeze geçiş</div>
+                            <div class="transport">🚇 Asnières → Saint-Lazare / Charles de Gaulle-Étoile hattı</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">13:30–15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Arc de Triomphe</strong> + Champs-Élysées yürüyüşü</div>
+                            <div class="why">12 caddenin birleştiği yıldız kavşağı ve Paris’in en simgesel bulvarı; tepeye çıkış şehir geometrisini çok iyi gösterir</div>
+                            <div class="weather-warning">⚠️ Arc de Triomphe tepe bileti için saatli giriş bakın</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">15:15–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Place de la Concorde → Tuileries Bahçesi</div>
+                            <div class="why">Champs-Élysées aksını Louvre yönüne bağlayan klasik Paris yürüyüşü</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">17:30–19:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Trocadéro</strong> + <strong>Eyfel Kulesi</strong></div>
+                            <div class="why">Kuleyi en iyi gören ilk bakış noktası Trocadéro; Eyfel Paris’in ana sembolü</div>
+                            <div class="weather-warning">⚠️ Kuleye çıkacaksanız saatli bilet alın; sadece manzara izlenecekse Trocadéro + Champ de Mars yeterli</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">20:00–22:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Akşam yemeği + Eyfel ışık gösterisi</div>
+                            <div class="why">Her saat başı parlayan kuleyi akşam görmek Paris deneyiminin en güçlü anlarından biri</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">22:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Asnières-sur-Seine konaklamaya dönüş</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">PARİS GÜN 2 — 26 MAYIS 2026 (SALI) — VERSAY & MONTMARTRE</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">08:00–09:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Asnières → Versay transferi</div>
+                            <div class="transport">🚇 Asnières / Saint-Lazare → Versailles Rive Droite veya RER C ile Versailles Château Rive Gauche; 60–75 dk pay bırakın</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">10:00–15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Versay Sarayı</strong> + Aynalı Salon + bahçeler</div>
+                            <div class="why">Fransız monarşisinin ihtişamını, saray mimarisini ve Avrupa saraylarına ilham veren bahçe düzenini en net gösteren yer</div>
+                            <div class="weather-warning">⚠️ Saray Pazartesi kapalı; Salı için saatli bilet alın</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">15:00–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Versay → Paris dönüş + kısa dinlenme</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">17:30–20:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Montmartre</strong> + Place du Tertre + <strong>Sacré-Cœur</strong></div>
+                            <div class="why">Paris’in bohem ruhu; ressamlar meydanı, yokuşlu sokaklar ve bazilika merdivenlerinden gün batımı manzarası</div>
+                            <div class="transport">🚇 Abbesses / Anvers yönü; dönüşte kalabalık için metro saatlerini kontrol edin</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">20:30–22:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Montmartre çevresinde akşam yemeği</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">PARİS GÜN 3 — 27 MAYIS 2026 (ÇARŞAMBA) — LOUVRE, NOTRE DAME & SEINE</div>
+                <div class="day-content">
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">09:00–13:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Louvre Müzesi</strong></div>
+                            <div class="why">Dünyanın en büyük sanat müzelerinden biri; Mona Lisa, Venus de Milo, Winged Victory ve cam piramit</div>
+                            <div class="weather-warning">⚠️ Louvre Salı kapalı; Çarşamba sabahı için saatli bilet alın</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:00–14:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Öğle yemeği — Louvre / Palais Royal çevresi</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">14:15–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Île de la Cité</strong> + <strong>Notre Dame Katedrali</strong></div>
+                            <div class="why">Paris’in tarihi kalbi; Gotik mimarinin en önemli örneklerinden biri ve şehrin ruhunu taşıyan ada</div>
+                            <div class="transport">🚶 Louvre → Pont Neuf → Île de la Cité yürüyüşü</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">17:00–18:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Seine Nehri</strong> tekne turu + köprüler</div>
+                            <div class="why">Paris’i nehirden görmek ana anıtları tek aks üzerinde bağlar; Alexandre III Köprüsü özellikle görkemli</div>
+                            <div class="weather-warning">⚠️ Hava kötüyse kapalı tekne seçin</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:00–21:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Saint-Germain / Latin Quarter akşam yemeği</div>
+                            <div class="why">Notre Dame ve Seine sonrası yürüyerek bağlanan canlı akşam bölgesi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">PARİS GÜN 4 — 28 MAYIS 2026 (PERŞEMBE) — ORSAY, SON TUR & 23:30 OTOBÜS</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">08:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Asnières-sur-Seine — check-out</div>
+                            <div class="why">Otobüs 23:30 olduğu için valizi konaklamaya/emanete bırakıp günü hafif gezmek en rahat seçenek</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">10:00–12:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Orsay Müzesi</strong></div>
+                            <div class="why">Eski tren istasyonundan dönüşen etkileyici yapı; Monet, Renoir, Van Gogh ve Empresyonist koleksiyonun ana adresi</div>
+                            <div class="weather-warning">⚠️ Orsay Pazartesi kapalı; Perşembe için saatli bilet alın</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:30–14:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Seine kıyısı + Pont Alexandre III + öğle yemeği</div>
+                            <div class="why">Orsay’dan köprüler ve Invalides aksına doğal yürüyüş</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">14:15–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Le Marais veya Saint-Germain serbest zaman</div>
+                            <div class="why">Son gün alışveriş/kafe molası; ağır müze sonrası esnek blok</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">17:00–19:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Akşam yemeği + valizleri alma</div>
+                            <div class="why">23:30 otobüsünden önce tempoyu düşürmek için erken yemek daha güvenli</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff9e6;">
+                        <div class="time">20:00–21:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Otobüs terminaline geçiş</div>
+                            <div class="why">Terminal netleşince rota güncellensin; Paris trafiği ve metro aktarmaları için geniş pay bırakın</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e3f2fd;">
+                        <div class="time">23:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Paris → Amsterdam otobüsü</strong></div>
+                            <div class="why">29 Mayıs sabahı Amsterdam varış planına bağlanır</div>
+                        </div>
+                    </div>
+                    <div class="alternatives">
+                        <h4>🔄 Paris Plan Alternatifleri</h4>
+                        <div class="alternative-item">
+                            <strong>Eyfel’e çıkış bileti bulamazsanız:</strong> Trocadéro + Champ de Mars manzarası yeterli; yükseklik deneyimi için Arc de Triomphe tepesini kullanın.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>Versay çok yorarsa:</strong> Bahçeleri kısaltıp Montmartre’ı daha erken ve sakin yapın.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>Otobüs terminali Bercy ise:</strong> Son akşam Le Marais / Bastille tarafında yemek daha pratik olur.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>📝 Paris Pratik Notlar</h4>
+                <ul>
+                    <li>Asnières-sur-Seine’den merkeze genelde Saint-Lazare bağlantısı pratik; günlük rota için Citymapper / Bonjour RATP kontrol edin</li>
+                    <li>Louvre, Orsay, Versay, Eyfel ve Arc de Triomphe için saatli biletleri önceden alın</li>
+                    <li>Louvre Salı kapalı; Orsay ve Versay Pazartesi kapalı olduğu için plan özellikle bu kapanışlara göre kuruldu</li>
+                    <li>Gece 00:00 havaalanı varışında toplu taşıma sınırlı olabilir; resmi taksi/shuttle seçeneğini önceden kontrol edin</li>
+                    <li>28 Mayıs otobüs terminali kesinleşince son akşam yemeği ve terminal transfer satırı netleştirilebilir</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
