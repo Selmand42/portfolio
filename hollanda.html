@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollanda Amsterdam Planı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #ff6600 0%, #21468b 100%);
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff6600 0%, #21468b 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .trip-header {
+            background: linear-gradient(135deg, #ff6600 0%, #21468b 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .trip-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+
+        .trip-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .trip-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .day-section {
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #ff6600 0%, #21468b 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .day-content {
+            padding: 15px 20px;
+        }
+
+        .activity {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: start;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity:hover {
+            background: #fff8f0;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #ff6600;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .activity-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .activity-name {
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .why {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+
+        .transport {
+            font-size: 0.75em;
+            color: #21468b;
+            padding-left: 10px;
+            border-left: 2px solid #21468b;
+            margin-top: 2px;
+        }
+
+        .alternatives {
+            background: #fff9e6;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .alternatives h4 {
+            color: #f57c00;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .alternative-item {
+            margin-bottom: 15px;
+        }
+
+        .alternative-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skipped {
+            background: #ffe6e6;
+            border: 1px solid #f44336;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-top: 15px;
+        }
+
+        .skipped h4 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .skipped-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skipped-item {
+            background: white;
+            border-left: 3px solid #f44336;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .skipped-item strong {
+            display: block;
+            color: #d32f2f;
+            margin-bottom: 3px;
+        }
+
+        .notes {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+        }
+
+        .notes h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notes li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .compact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 3px solid #ff6600;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .info-box strong {
+            color: #21468b;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .weather-warning {
+            font-size: 0.75em;
+            color: #ff9800;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ff9800;
+            margin-top: 4px;
+        }
+
+        .flight-box {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .flight-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .flight-option {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .flight-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .flight-option strong {
+            color: #1565c0;
+        }
+
+        @media (max-width: 768px) {
+            .activity {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .time {
+                font-size: 0.85em;
+            }
+
+            .trip-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌷 Hollanda Amsterdam Planı</h1>
+        </header>
+
+        <div class="content">
+            <div class="trip-header">
+                <h2>Amsterdam — 2,5 Gün</h2>
+                <div class="trip-info">
+                    <span>🚌 <strong>Varış:</strong> 29 Mayıs 2026 (Cuma) 08:55 — Amsterdam Otogarı (Sloterdijk)</span>
+                    <span>✈️ <strong>Uçuş:</strong> 31 Mayıs 2026 (Pazar) 18:00 — AMS veya RTM (plana göre seçilecek)</span>
+                    <span>🏨 <strong>Konaklama:</strong> Olympic Hotel Amsterdam (Gün 1 akşam check-in)</span>
+                    <span>🚇 <strong>Ulaşım:</strong> Toplu taşıma (GVB + NS)</span>
+                </div>
+            </div>
+
+            <div class="compact-info">
+                <div class="info-box">
+                    <strong>Gün 1 — 29 Mayıs (Cuma)</strong>
+                    Kahvaltı ve yürüyüş; 13:30’da Kaan ile Museumplein’de buluşma; müzeler; akşam otel
+                </div>
+                <div class="info-box">
+                    <strong>Gün 2 — 30 Mayıs (Cumartesi)</strong>
+                    Şehir gezisi — Jordaan, kanallar, merkez
+                </div>
+                <div class="info-box">
+                    <strong>Gün 3 — 31 Mayıs (Pazar)</strong>
+                    Check-out, tam gün gezi; akşam uçuşu
+                </div>
+            </div>
+
+            <div class="flight-box">
+                <h4>✈️ Uçak Seçimi — Plan Sonunda Karar</h4>
+                <div class="flight-option">
+                    <strong>Schiphol (AMS) — önerilen:</strong> Amsterdam Centraal → Schiphol direkt tren ~15–20 dk. 18:00 uçuş için otelden ~15:00–15:30 çıkış yeterli.
+                </div>
+                <div class="flight-option">
+                    <strong>Rotterdam The Hague (RTM):</strong> Amsterdam → Rotterdam Centraal ~40 dk (IC tren), oradan metro/tram veya shuttle ~25–30 dk. 18:00 uçuş için otelden en geç ~14:00 çıkış gerekir; son gün programı kısaltır.
+                </div>
+                <p style="margin-top: 10px; font-size: 0.85em; color: #555;">Tüm geziyi Amsterdam’da geçireceğiniz için büyük olasılıkla <strong>AMS uçuşunu tutmanız</strong> mantıklı; RTM’yi iptal edebilirsiniz.</p>
+            </div>
+
+            <div class="alternatives" style="margin-bottom: 20px;">
+                <h4>👥 Kaan — 29 Mayıs 13:30</h4>
+                <p style="margin: 0 0 12px 0; color: #666; font-size: 0.9em;"><strong>Kaan</strong> 13:30’da <strong>otogardan (Sloterdijk)</strong> iner; siz öğleden önce <strong>Museumplein</strong>’e geçersiniz. Buluşma <strong>Museumplein</strong>’de — Kaan otogardan tram/metro ile ~20 dk. Ardından üç kişi birlikte müzelere. Öğleden sonra müze biletlerini buna göre alın.</p>
+            </div>
+
+            <div class="alternatives" style="margin-bottom: 20px;">
+                <h4>🎫 Müze Biletleri — Önceden Alınmalı</h4>
+                <p style="margin: 0; color: #666; font-size: 0.9em;">
+                    <strong>Rijksmuseum</strong> ve <strong>Van Gogh Müzesi</strong> kesin planda; ikisi de Museumplein’de yan yana.
+                    Gün 1 öğleden sonra: önce Rijksmuseum (~14:00), ardından Van Gogh (~17:00) — Cuma Van Gogh akşam geç saate açık; saatli bilet şart — özellikle Van Gogh hafta sonu çok hızlı tükenir.
+                    Müze Kart yoksa tek tek online bilet şart.
+                </p>
+            </div>
+
+            <!-- GÜN 1 -->
+            <div class="day-section">
+                <div class="day-header">GÜN 1 — 29 MAYIS 2026 (CUMA) — VARIŞ, KAAN & MÜZELER</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">08:55</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Amsterdam Otogarı’na varış (Sloterdijk) — siz ikiniz</div>
+                            <div class="why">Kaan 13:30’da otogara inecek; buluşma Museumplein’de</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">09:15–10:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Kahvaltı</div>
+                            <div class="why">Otogar / Sloterdijk çevresinde veya kısa trenle Centraal yakınında</div>
+                            <div class="transport">🚇 İsterseniz Sloterdijk → Centraal (~5 dk)</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:30–13:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Kısa şehir yürüyüşü: Centraal çevresi → Dam Meydanı → Begijnhof</div>
+                            <div class="why">Kaan gelene kadar hafif tempo; öğleden önce Museumplein yönüne ilerleyin</div>
+                            <div class="transport">🚶 Centraal’dan merkeze yürüyüş ~20 dk veya tram</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:30–13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Museumplein’e hareket — buluşma noktasında bekleme</div>
+                            <div class="why">Kaan otogara 13:30’da iner; siz Museumplein’de beklersiniz</div>
+                            <div class="transport">🚇 Centraal veya merkez → Museumplein: tram 2/5/12 veya metro (~15 dk)</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #e8f5e9;">
+                        <div class="time">13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Kaan ile buluşma</strong> — Museumplein</div>
+                            <div class="why">Kaan Sloterdijk’ten tram/metro ile gelir (~20 dk); müzeler hemen yanında</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">14:00–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Rijksmuseum</strong> (kesin plan)</div>
+                            <div class="why">Hollanda Altın Çağı; Rembrandt, Vermeer. Cuma kapanış ~17:00 — öğleden sonra slotu buna göre</div>
+                            <div class="weather-warning">⚠️ Saatli bilet şart — rijksmuseum.nl</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">16:30–17:15</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Kısa mola — Museumplein / De Pijp yönü</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">17:15–19:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Van Gogh Müzesi</strong> (kesin plan)</div>
+                            <div class="why">Rijksmuseum’un hemen yanında; Cuma akşamüstü geç saate kadar açık olabilir — bilet saatine göre</div>
+                            <div class="weather-warning">⚠️ vangoghmuseum.nl — kesin saatli bilet</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:30–21:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Akşam yemeği (De Pijp, Museumplein çevresi veya Jordaan)</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">22:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Olympic Hotel — check-in ve geceleme</div>
+                            <div class="transport">🚇 Museumplein / Centraal → Otel: tram veya metro</div>
+                        </div>
+                    </div>
+
+                    <div class="alternatives">
+                        <h4>🔄 Gün 1 Alternatifleri</h4>
+                        <div class="alternative-item">
+                            <strong>Müze sırası:</strong> Bilet saatleriniz Van Gogh önce diyorsa önce Van Gogh (~14:00), sonra Rijksmuseum — Rijksmuseum Cuma ~17:00’de kapanır.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>Kaan erken inerse:</strong> Museumplein’de erken buluşup müzelere erken başlayabilirsiniz.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GÜN 2 -->
+            <div class="day-section">
+                <div class="day-header">GÜN 2 — 30 MAYIS 2026 (CUMARTESİ) — ŞEHİR KEŞFİ</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">09:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Kahvaltı (otel veya Jordaan / Centraal çevresi)</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:00–12:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Jordaan + Nine Streets (Negen Straatjes) + Westerkerk çevresi</div>
+                            <div class="why">Amsterdam’ın en fotojenik mahalleleri; Anne Frank Evi dışarıdan görülebilir</div>
+                            <div class="transport">🚇 Otel → Jordaan: tram veya yürüyüş</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:30–13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Öğle yemeği</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:30–15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Vondelpark yürüyüşü</div>
+                            <div class="why">Açık hava molası; rahat tempo</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">15:30–17:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Merkez: Dam Meydanı → Kalverstraat → Bloemenmarkt (çiçek pazarı)</div>
+                            <div class="transport">🚇 veya yürüyüş</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">17:30–19:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Kanal turu (tekne) — opsiyonel ama önerilir</div>
+                            <div class="why">Amsterdam deneyiminin klasik parçası</div>
+                            <div class="weather-warning">⚠️ Hava kötüyse kapalı tekne veya atlayın</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:30–21:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Akşam yemeği + gezinti (Leidseplein veya Rembrandtplein)</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">21:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Olympic Hotel’e dönüş</div>
+                        </div>
+                    </div>
+
+                    <div class="alternatives">
+                        <h4>🔄 Gün 2 Alternatifleri</h4>
+                        <div class="alternative-item">
+                            <strong>Stedelijk / Moco:</strong> Müze yorgunluğu yoksa öğleden sonra modern sanat müzesi eklenebilir (bilet gerekir).
+                        </div>
+                        <div class="alternative-item">
+                            <strong>Yağmur:</strong> Heineken Experience veya NEMO (bilet gerekir).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GÜN 3 -->
+            <div class="day-section">
+                <div class="day-header">GÜN 3 — 31 MAYIS 2026 (PAZAR) — SON GÜN & UÇUŞ</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">08:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Olympic Hotel — check-out</div>
+                            <div class="why">Otele geri dönüş yok</div>
+                            <div class="transport">🚇 Otel → De Pijp veya Centraal: tram / metro</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">09:00–11:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Albert Cuyp Pazarı (Pazar açık) + De Pijp mahallesi</div>
+                            <div class="why">Pazar günü canlı pazar; stroopwafel, peynir, sokak lezzetleri </div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">11:15–12:45</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Bloemenmarkt (çiçek pazarı) → Rembrandtplein → Amstel nehri kenarı</div>
+                            <div class="why">Merkeze yakın ikonik duraklar</div>
+                            <div class="transport">🚶 De Pijp → merkez: tram veya ~25 dk yürüyüş</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:45–13:45</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Öğle yemeği + son alışveriş (Kalverstraat / Dam çevresi)</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:45–14:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Dam Meydanı → Begijnhof → Kalverstraat son tur</div>
+                            <div class="why">Gün 1’de yetmeyen merkez noktaları veya tekrar ziyaret; havaalanına gitmeden önce son şehir turu</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff9e6;">
+                        <div class="time">14:30–15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Amsterdam Centraal → havaalanına hareket</div>
+                            <div class="why">18:00 uçuş için AMS’te ~15:30–16:00, RTM’de daha erken varış gerekir</div>
+                            <div class="transport">🚇 Centraal → Schiphol tren ~15–20 dk (AMS) | Centraal → Rotterdam IC + metro/shuttle (RTM)</div>
+                        </div>
+                    </div>
+
+                    <div class="alternatives" style="margin-top: 15px;">
+                        <h4>✈️ Havaalanı Transferi — 18:00 Uçuş</h4>
+                        <div class="alternative-item">
+                            <strong>AMS (Schiphol) — önerilen:</strong><br>
+                            ~14:30 şehirden hareket → ~15:00–15:30 havaalanında. Varış 1 çıkışı civarında kalıcı <strong>“I amsterdam”</strong> harfleri — kısa fotoğraf molası (vakit kalırsa). Schengen içi 2 saat öncesi genelde yeterli.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>RTM (Rotterdam):</strong><br>
+                            ~13:30 şehirden hareket gerekir; öğleden sonraki merkez turunu kısaltın veya atlayın.
+                        </div>
+                    </div>
+
+                    <div class="activity" style="background: #e3f2fd; margin-top: 15px;">
+                        <div class="time">~15:30 / ~14:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Havaalanına varış</strong> (AMS veya RTM)</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">18:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Uçuş — kullanılmayan bilet iptal edilecek</div>
+                        </div>
+                    </div>
+
+                    <div class="skipped">
+                        <h4>⏰ Süre Yetmeyeceği İçin Plana Alınmayanlar</h4>
+                        <div class="skipped-items">
+                            <div class="skipped-item">
+                                <strong>Zaanse Schans</strong>
+                                Yel değirmenleri köyü — gidiş-dönüş yarım gün ister
+                            </div>
+                            <div class="skipped-item">
+                                <strong>Rotterdam günübirlik</strong>
+                                Kübizist mimari, Euromast — ayrı tam gün
+                            </div>
+                            <div class="skipped-item">
+                                <strong>Keukenhof / Lale bahçeleri</strong>
+                                Mayıs sonu genelde kapalı veya sezon dışı
+                            </div>
+                            <div class="skipped-item">
+                                <strong>Giethoorn</strong>
+                                “Hollanda Venedik’i” — çok uzak, minimum tam gün
+                            </div>
+                            <div class="skipped-item">
+                                <strong>Anne Frank Evi (iç mekân)</strong>
+                                Aylar öncesinden bilet gerekir; dışarıdan görülebilir
+                            </div>
+                            <div class="skipped-item">
+                                <strong>Heineken Experience / A’DAM Lookout</strong>
+                                Vakit kalırsa Gün 1 akşamı veya Gün 2 alternatifi
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alternatives" style="margin-top: 15px;">
+                        <h4>🔄 Son Gün Sabah Alternatifleri</h4>
+                        <div class="alternative-item">
+                            <strong>Anne Frank biletiniz varsa:</strong> Albert Cuyp yerine sabah 09:00–10:30 Anne Frank Evi, sonra pazara geçiş.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>RTM uçuşunu tutarsanız:</strong> Öğleden sonraki Dam turunu atlayın; ~13:30’da doğrudan Rotterdam yönüne hareket edin.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notlar -->
+            <div class="notes">
+                <h4>📝 Pratik Notlar</h4>
+                <ul>
+                    <li><strong>9292 uygulaması</strong> — tüm tram/metro/tren rotaları için kullanın</li>
+                    <li><strong>OV-chipkaart</strong> veya GVB günlük bilet; Schiphol için tek bilet yeterli (Amsterdam & Region Travel Ticket 3 günlük de düşünülebilir)</li>
+                    <li><strong>Rijksmuseum + Van Gogh</strong> biletlerini şimdi alın; Cumartesi en yoğun günlerden</li>
+                    <li>Otogar varış noktanız farklıysa (Amstel, Bijlmer) — Gün 1 transfer satırını 9292 ile güncelleyin</li>
+                                        <li>Bisiklet kiralamak Amsterdam’da klasik ama bu planda yürüyüş + toplu taşıma öncelikli (trafik alışkanlığı gerekir)</li>
+                    <li>Hava değişken — ince yağmurluk ve kat kat giyinin</li>
+                    <li>Planı daraltmak veya genişletmek için yönlendirmenize göre güncellerim</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
