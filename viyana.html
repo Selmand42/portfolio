@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vienna Travel Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #c8102e 0%, #ffffff 50%, #c8102e 100%);
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8f001b 0%, #c8102e 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .trip-header {
+            background: linear-gradient(135deg, #8f001b 0%, #c8102e 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .trip-header h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+
+        .trip-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .trip-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .compact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 3px solid #c8102e;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .info-box strong {
+            color: #8f001b;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .day-section {
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #8f001b 0%, #c8102e 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .day-content {
+            padding: 15px 20px;
+        }
+
+        .activity {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: start;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity:hover {
+            background: #fff6f7;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #c8102e;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .activity-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .activity-name {
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .why {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+
+        .transport {
+            font-size: 0.75em;
+            color: #8f001b;
+            padding-left: 10px;
+            border-left: 2px solid #8f001b;
+            margin-top: 2px;
+        }
+
+        .weather-warning {
+            font-size: 0.75em;
+            color: #b15b00;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ffc107;
+            margin-top: 4px;
+        }
+
+        .flight-box {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .flight-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .flight-option {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .flight-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .flight-option strong {
+            color: #1565c0;
+        }
+
+        .alternatives {
+            background: #fff9e6;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .alternatives h4 {
+            color: #b15b00;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .alternative-item {
+            margin-bottom: 15px;
+        }
+
+        .alternative-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+        }
+
+        .notes h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notes li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .activity {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .time {
+                font-size: 0.85em;
+            }
+
+            .trip-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇦🇹 Vienna Travel Plan</h1>
+        </header>
+
+        <div class="content">
+            <div class="trip-header">
+                <h2>Vienna — 3 Days / Neubau Base</h2>
+                <div class="trip-info">
+                    <span>✈️ <strong>Arrival:</strong> 22 May 2026 (Friday) 10:00 — Vienna International Airport (VIE)</span>
+                    <span>✈️ <strong>Departure:</strong> 25 May 2026 (Monday) 05:00 — Vienna International Airport (VIE)</span>
+                    <span>🏨 <strong>Stay:</strong> Myrthengasse 7, 07. Neubau, 1070 Vienna</span>
+                    <span>🚇 <strong>Transport:</strong> Airport train/bus, metro, tram, walking</span>
+                    <span>🎫 <strong>Tickets:</strong> Timed tickets recommended for Schönbrunn, Belvedere, Sisi Museum/Hofburg and KHM</span>
+                </div>
+            </div>
+
+            <div class="compact-info">
+                <div class="info-box">
+                    <strong>Day 1 — 22 May (Friday)</strong>
+                    Arrival, Innere Stadt, St. Stephen’s Cathedral, Hofburg exterior, Ringstrasse, State Opera
+                </div>
+                <div class="info-box">
+                    <strong>Day 2 — 23 May (Saturday)</strong>
+                    Schönbrunn Palace, Naschmarkt, Kunsthistorisches Museum, Prater evening
+                </div>
+                <div class="info-box">
+                    <strong>Day 3 — 24 May (Sunday)</strong>
+                    Belvedere, Karlskirche, Hofburg/Sisi Museum, classic café, return to Myrthengasse
+                </div>
+            </div>
+
+            <div class="flight-box">
+                <h4>📍 Base & Distance Notes — From Myrthengasse 7</h4>
+                <div class="flight-option">
+                    <strong>Walkable core:</strong> MuseumsQuartier/KHM ~10–15 min walk, Rathaus ~15–20 min, Hofburg ~20 min, State Opera ~20–25 min.
+                </div>
+                <div class="flight-option">
+                    <strong>By transit:</strong> St. Stephen’s Cathedral ~15–20 min, Schönbrunn ~25–35 min, Belvedere ~25–30 min, Prater ~25–35 min.
+                </div>
+                <div class="flight-option">
+                    <strong>Early departure:</strong> the itinerary ends with returning to Myrthengasse on 24 May evening; arrange the 25 May 05:00 airport transfer separately.
+                </div>
+            </div>
+
+            <div class="alternatives" style="margin-bottom: 20px;">
+                <h4>🎯 Vienna Must-Sees Included</h4>
+                <p style="margin: 0; color: #666; font-size: 0.9em;">
+                    This plan explicitly includes all 9 requested places: <strong>Schönbrunn Palace</strong>, <strong>St. Stephen’s Cathedral</strong>, <strong>Hofburg Palace / Sisi Museum</strong>, <strong>Belvedere Palace</strong>, <strong>Vienna State Opera</strong>, <strong>Kunsthistorisches Museum</strong>, <strong>Prater + Giant Ferris Wheel</strong>, <strong>Naschmarkt</strong>, and <strong>Rathaus + Ringstrasse</strong>.
+                </p>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">DAY 1 — 22 MAY 2026 (FRIDAY) — ARRIVAL & OLD VIENNA</div>
+                <div class="day-content">
+                    <div class="activity">
+                        <div class="time">10:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Arrive at Vienna International Airport (VIE)</div>
+                            <div class="why">Morning arrival gives you a strong first sightseeing day without overloading it</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">10:45–12:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Airport → Myrthengasse / Neubau area</div>
+                            <div class="transport">🚇 CAT/S7/REX to the city + U-Bahn/tram toward Volkstheater/Neubau; total usually ~45–60 min depending on connection</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:00–13:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Lunch near Neubau / MuseumsQuartier</div>
+                            <div class="why">Keeps the first block practical after the flight and starts close to your base</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">13:30–15:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>St. Stephen’s Cathedral</strong> + Stephansplatz</div>
+                            <div class="why">Vienna’s symbolic center; the cathedral, towers and square are the natural first stop in the old city</div>
+                            <div class="transport">🚇 Myrthengasse → Stephansplatz: ~15–20 min by U-Bahn/tram, or ~30 min walk</div>
+                            <div class="weather-warning">⚠️ English cathedral tours usually require checking the day’s schedule</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">15:00–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Graben → Kohlmarkt → <strong>Hofburg Palace</strong> courtyards</div>
+                            <div class="why">Elegant imperial Vienna in one walk: cafés, historic streets and the Habsburg palace complex</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">16:45–18:15</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Vienna State Opera</strong> exterior + <strong>Ringstrasse</strong> walk to <strong>Rathaus</strong></div>
+                            <div class="why">The Opera anchors Vienna’s music identity; Ringstrasse and Rathaus show the city’s grand 19th-century architecture</div>
+                            <div class="transport">🚶 Opera → Rathaus: ~20–25 min walk via Ringstrasse, or tram 1/2 for a partial loop</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">18:30–20:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Dinner in the Innere Stadt or near the Opera</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">20:00–21:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Optional: Vienna State Opera guided tour or standing-room performance check</div>
+                            <div class="why">A classic Vienna experience if timing and tickets work; otherwise the exterior and Ring walk already cover the landmark</div>
+                            <div class="transport">🚇 State Opera → Myrthengasse: ~15–20 min by tram/U-Bahn, or ~20–25 min walk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">DAY 2 — 23 MAY 2026 (SATURDAY) — SCHÖNBRUNN, ART & PRATER</div>
+                <div class="day-content">
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">09:00–12:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Schönbrunn Palace</strong> + gardens + Gloriette view</div>
+                            <div class="why">The essential imperial summer palace; the gardens and Gloriette give the visit a strong sense of scale</div>
+                            <div class="weather-warning">⚠️ Palace is open daily; book a timed palace tour in advance</div>
+                            <div class="transport">🚇 Myrthengasse → Schönbrunn: ~25–35 min by tram/U-Bahn; plan extra time for the gardens</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">13:00–14:15</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Naschmarkt lunch</div>
+                            <div class="why">Saturday is the best fit: market stalls are active and it connects well with the museum quarter</div>
+                            <div class="transport">🚇 Schönbrunn → Naschmarkt/Kettenbrückengasse: ~20–25 min</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">14:30–17:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Kunsthistorisches Museum</strong> (KHM)</div>
+                            <div class="why">Vienna’s major art-history museum; a natural counterpart to the imperial palace day</div>
+                            <div class="weather-warning">⚠️ Book ahead if you want a specific slot; allow at least 2–2.5 hours</div>
+                            <div class="transport">🚶 Naschmarkt → KHM: ~15–20 min walk; KHM → Myrthengasse: ~10–15 min walk</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">17:15–18:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">MuseumsQuartier / Maria-Theresien-Platz break</div>
+                            <div class="why">Good decompression after KHM; cafés and open courtyards nearby</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">19:00–21:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Prater evening + Giant Ferris Wheel (Riesenrad)</div>
+                            <div class="why">A lighter, playful contrast to the imperial and museum-heavy day</div>
+                            <div class="transport">🚇 Myrthengasse / MuseumsQuartier area → Praterstern: ~25–35 min by U-Bahn</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-section">
+                <div class="day-header">DAY 3 — 24 MAY 2026 (SUNDAY) — BELVEDERE, HOFBURG & FINAL EVENING</div>
+                <div class="day-content">
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">09:00–11:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Upper Belvedere</strong></div>
+                            <div class="why">Home to Klimt’s “The Kiss” and one of Vienna’s most elegant Baroque palace settings</div>
+                            <div class="weather-warning">⚠️ Upper Belvedere is open daily 09:00–18:00; book the timed ticket early to avoid midday crowds</div>
+                            <div class="transport">🚇 Myrthengasse → Upper Belvedere: ~25–30 min by tram/U-Bahn, or ~45 min walk</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">11:15–12:15</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Karlskirche + Karlsplatz</div>
+                            <div class="why">One of Vienna’s most photogenic Baroque churches; easy walk from Belvedere</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">12:30–13:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Lunch near Karlsplatz / city center</div>
+                        </div>
+                    </div>
+                    <div class="activity" style="background: #fff3e0;">
+                        <div class="time">14:00–16:30</div>
+                        <div class="activity-details">
+                            <div class="activity-name"><strong>Hofburg Imperial Apartments + Sisi Museum</strong></div>
+                            <div class="why">The best indoor look at Habsburg Vienna in the historic palace complex</div>
+                            <div class="weather-warning">⚠️ Open daily; last admission is usually 16:30, so do not push this later</div>
+                            <div class="transport">🚶 Karlsplatz → Hofburg: ~15–20 min walk; Hofburg → Myrthengasse: ~20 min walk</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">16:45–18:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Coffee break: Café Central / Demel / nearby classic café</div>
+                            <div class="why">Vienna café culture deserves a calm final stop</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="time">18:00–20:00</div>
+                        <div class="activity-details">
+                            <div class="activity-name">Early dinner + return to Myrthengasse 7</div>
+                            <div class="why">Enough for the final evening; no separate 25 May sightseeing plan is needed before the early flight</div>
+                            <div class="transport">🚶/🚇 City center → Myrthengasse: ~15–25 min depending on dinner location</div>
+                        </div>
+                    </div>
+                    <div class="alternatives">
+                        <h4>🔄 Day 3 Alternatives</h4>
+                        <div class="alternative-item">
+                            <strong>If you want a calmer last day:</strong> Skip the Sisi Museum and keep only Belvedere + Karlskirche + cafés.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>If the 05:00 flight feels too tight:</strong> Pre-book a taxi from Myrthengasse 7 before you leave for the evening.
+                        </div>
+                        <div class="alternative-item">
+                            <strong>If the weather is bad:</strong> Spend more time inside Belvedere or Hofburg and reduce outdoor walking around Karlsplatz.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>📝 Practical Notes</h4>
+                <ul>
+                    <li>Use the WienMobil or ÖBB app for real-time routing, especially for the airport transfer.</li>
+                    <li>Base address: Myrthengasse 7, 07. Neubau, 1070 Vienna; most central sights are walkable or 15–30 minutes by transit.</li>
+                    <li>There is no sightseeing plan for 25 May; the itinerary ends after returning to Myrthengasse on 24 May evening.</li>
+                    <li>For the 25 May 05:00 flight, arrange the airport transfer separately; a taxi/pre-booked transfer is safer than relying on first public connections.</li>
+                    <li>Schönbrunn Palace, Upper Belvedere and Sisi Museum/Hofburg are open daily in the checked official schedules.</li>
+                    <li>Naschmarkt stalls are best Friday/Saturday; Sunday is not a market-stall day, so the plan uses Saturday lunch.</li>
+                    <li>All 9 requested must-sees are included explicitly: Schönbrunn, Stephansdom, Hofburg, Belvedere, State Opera, KHM, Prater/Riesenrad, Naschmarkt, Rathaus/Ringstrasse.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
